@@ -17,6 +17,16 @@ public class farmEntity {
     private Long id;
     
     private String address;
+
+    public farmEntity(String address, Double exension, String name) {
+        this.address = address;
+        this.exension = exension;
+        this.name = name;
+    }
+
+    /** Empty constructor */
+    public farmEntity(){}
+
     private Double exension;
     private String name;
 

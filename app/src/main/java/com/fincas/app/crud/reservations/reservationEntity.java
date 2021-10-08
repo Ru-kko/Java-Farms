@@ -20,6 +20,16 @@ public class reservationEntity {
 
     private Date fristDate;
     private Date lastDate;
+
+    public reservationEntity(clientEntity client, farmEntity farm, Date fristDate, Date lastDate) {
+        this.client = client;
+        this.farm = farm;
+        this.fristDate = fristDate;
+        this.lastDate = lastDate;
+    }
+    /** Empty constructor */
+    public reservationEntity(){}
+
     
     public clientEntity getClient() {
         return client;

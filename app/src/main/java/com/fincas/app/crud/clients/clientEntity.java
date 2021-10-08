@@ -17,6 +17,13 @@ public class clientEntity {
     private String Email;   
     private Integer Age;
 
+    public clientEntity(String name, String email, Integer age) {
+        Name = name;
+        Email = email;
+        Age = age;
+    }
+    /** Empty constructor */
+    public clientEntity(){}
     
     public Long getId() {
         return id;

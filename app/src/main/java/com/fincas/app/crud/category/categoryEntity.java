@@ -16,6 +16,13 @@ public class categoryEntity {
     private String name;
     private String description;
     
+    public categoryEntity(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+    /** Empty Constructor */
+    public categoryEntity(){}
+    
     public Long getId() {
         return id;
     }
