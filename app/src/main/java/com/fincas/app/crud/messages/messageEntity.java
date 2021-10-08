@@ -11,15 +11,23 @@ import javax.persistence.Table;
 public class messageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String messageText;
 
     public messageEntity(String messageText) {
         this.messageText = messageText;
     }
+    
     /** Empty constructor */
     public messageEntity(){}
+
+    public Long getId() {
+        return id;
+    }
+    public void setId(long id) {
+        this.id = id;
+    }
 
     public String getMessageText() {
         return messageText;

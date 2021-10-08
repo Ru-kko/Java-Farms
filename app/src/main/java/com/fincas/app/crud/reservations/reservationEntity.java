@@ -3,6 +3,9 @@ package com.fincas.app.crud.reservations;
 import java.sql.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -13,6 +16,9 @@ import com.fincas.app.crud.farms.farmEntity;
 @Table(name="RESERVATIONS")
 public class reservationEntity {
     
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
     @ManyToOne
     private clientEntity client;
     @ManyToOne
@@ -30,7 +36,6 @@ public class reservationEntity {
     /** Empty constructor */
     public reservationEntity(){}
 
-    
     public clientEntity getClient() {
         return client;
     }

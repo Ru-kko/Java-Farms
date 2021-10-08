@@ -16,6 +16,7 @@ public class clientEntity {
     private String Name;
     private String Email;   
     private Integer Age;
+    private String password;
 
     public clientEntity(String name, String email, Integer age) {
         Name = name;
@@ -48,5 +49,11 @@ public class clientEntity {
     }
     public void setAge(Integer age) {
         this.Age = age;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
