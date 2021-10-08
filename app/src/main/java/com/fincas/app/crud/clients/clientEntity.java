@@ -16,19 +16,19 @@ public class clientEntity {
     private String Name;
     private String Email;   
     private Integer Age;
+    private String password;
 
-    
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
     public String getName() {
         return Name;
     }
     public void setName(String name) {
         this.Name = name;
+    }
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
     public String getEmail() {
         return Email;
@@ -41,5 +41,11 @@ public class clientEntity {
     }
     public void setAge(Integer age) {
         this.Age = age;
+    }
+    public String getPassword() {
+        return password;
+    }
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
