@@ -1,20 +1,30 @@
 package com.fincas.app.crud.category;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fincas.app.crud.farms.farmEntity;
 
 @Entity
 @Table(name="CATEGORIES")
 public class categoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
 
     private String name;
     private String description;
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "category")
+    @JsonIgnoreProperties("category")
+    private List<farmEntity> farms;
     
     public categoryEntity(String name, String description) {
         this.name = name;

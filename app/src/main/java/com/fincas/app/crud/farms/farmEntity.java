@@ -4,9 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fincas.app.crud.category.categoryEntity;
 
 @Entity
@@ -17,6 +19,13 @@ public class farmEntity {
     private Long id;
     
     private String address;
+    private Double exension;
+    private String name;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    @JsonIgnoreProperties("farms")
+    private categoryEntity category;
 
     public farmEntity(String address, Double exension, String name) {
         this.address = address;
@@ -26,12 +35,6 @@ public class farmEntity {
 
     /** Empty constructor */
     public farmEntity(){}
-
-    private Double exension;
-    private String name;
-
-    @ManyToOne
-    private categoryEntity category;
     
     public Long getId() {
         return id;
