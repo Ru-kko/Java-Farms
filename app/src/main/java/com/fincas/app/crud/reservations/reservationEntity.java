@@ -6,22 +6,29 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fincas.app.crud.clients.clientEntity;
 import com.fincas.app.crud.farms.farmEntity;
 
 @Entity
 @Table(name="RESERVATIONS")
 public class reservationEntity {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id;
+    
     @ManyToOne
+    @JoinColumn(name = "client")
+    @JsonIgnoreProperties("reservations")
     private clientEntity client;
+
     @ManyToOne
+    @JoinColumn(name = "farm")
+    @JsonIgnoreProperties("reservations")
     private farmEntity farm;
 
     private Date fristDate;
@@ -36,6 +43,12 @@ public class reservationEntity {
     /** Empty constructor */
     public reservationEntity(){}
 
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
     public clientEntity getClient() {
         return client;
     }

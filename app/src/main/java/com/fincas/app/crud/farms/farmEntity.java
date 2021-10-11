@@ -1,15 +1,21 @@
 package com.fincas.app.crud.farms;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fincas.app.crud.category.categoryEntity;
+import com.fincas.app.crud.messages.messageEntity;
+import com.fincas.app.crud.reservations.reservationEntity;
 
 @Entity
 @Table(name="FARMS")
@@ -19,18 +25,28 @@ public class farmEntity {
     private Long id;
     
     private String address;
-    private Double exension;
+    private Integer extension;
     private String name;
+    private String description;  
 
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
+    @JsonIgnoreProperties("farm")
+    private List<reservationEntity> reservations;
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
+    @JsonIgnoreProperties("farm")
+    private List<messageEntity> messages;
+    
     @ManyToOne
-    @JoinColumn(name = "category_id")
+    @JoinColumn(name = "category")
     @JsonIgnoreProperties("farms")
     private categoryEntity category;
 
-    public farmEntity(String address, Double exension, String name) {
+    public farmEntity(String address, Integer extension, String name, String description) {
         this.address = address;
-        this.exension = exension;
+        this.extension = extension;
         this.name = name;
+        this.description = description;
     }
 
     /** Empty constructor */
@@ -42,17 +58,24 @@ public class farmEntity {
     public void setId(Long id) {
         this.id = id;
     }
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
     public String getAddress() {
         return address;
     }
     public void setAddress(String address) {
         this.address = address;
     }
-    public Double getExension() {
-        return exension;
+    public Integer getExtension() {
+        return extension;
     }
-    public void setExension(Double exension) {
-        this.exension = exension;
+    public void setExtension(Integer exension) {
+        this.extension = exension;
     }
     public String getName() {
         return name;

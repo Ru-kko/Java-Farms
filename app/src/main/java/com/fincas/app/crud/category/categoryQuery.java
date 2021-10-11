@@ -14,7 +14,7 @@ public class categoryQuery {
     public List<categoryEntity> getAllcategories(){
         return (List<categoryEntity>) categoryRep.findAll();
     }
-    public Optional<categoryEntity> getFarmByID(long id){
+    public Optional<categoryEntity> getCategoryByID(long id){
         return categoryRep.findById(id);
     }
     public categoryEntity save(categoryEntity category){
