@@ -11,7 +11,9 @@
     <title th:text="${title}" />
 </head>
 
+
 <body class="row justify-content-center">
+    <nav th:replace = fragments/header.html::header></nav>
     <div class="container" id="farmsTable">
         <div class="row justify-content-center">
             <div class="col-lg-6 contentTable">
