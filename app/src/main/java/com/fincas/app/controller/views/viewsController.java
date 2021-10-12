@@ -10,13 +10,21 @@ public class viewsController {
     @GetMapping("/")
     public String homeView(Model model){
         model.addAttribute("title", "Reto3");
-        model.addAttribute("test", "fragments/homePage.html::home");
         return "home";
     }
     @GetMapping("/farms")
     public String farmsView(Model model){
         model.addAttribute("title", "Farms");
-        model.addAttribute("table", "fragments/farm.html :: table");
-        return "main";
+        return "farms";
+    }
+    @GetMapping("/clients")
+    public String clientsView(Model model){
+        model.addAttribute("title", "Clients");
+        return "clients";
+    }
+    @GetMapping("/messages")
+    public String messagesView(Model model){
+        model.addAttribute("title", "Messages");
+        return "messages";
     }
 }
