@@ -1,9 +1,3 @@
-/**
- *  @var 0 = Table
- *  @var 1 = Adding
- *  @var 2 = Editing
- */
-const localState = 0;
 const domain = document.domain == 'localhost' ? 'http://localhost:8080' : document.domain;
 
 var inputs = [
