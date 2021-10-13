@@ -1,10 +1,11 @@
 const domain = document.domain == 'localhost' ? 'http://localhost:8080' : document.domain;
 
-// var inputs = [
-//     $('#inputs div #idInput'),
-//     $('#inputs div #nameInput'),
-//     $('#inputs div #descriptionInput')
-// ];
+var inputs = [
+    $('#inputs div #idInput'),
+    $('#inputs div #nameInput'),
+    $('#inputs div #addressInput'),
+    $('#inputs div #descriptionInput')
+];
 
 $(document).ready(() => {
     var used = false;
@@ -14,7 +15,12 @@ $(document).ready(() => {
         url: domain + '/api/Category',
         success: (res) => {
             for (let i = 0; i < res.length; i++) {
-                const catRow = `<option value="${res[i].id}">${res[i].name}</option>`;
+                let catRow;
+                if(i == 0){
+                    catRow = `<option value="${res[i].id}" selected>${res[i].name}</option>`;
+                }else{
+                    catRow = `<option value="${res[i].id}">${res[i].name}</option>`;
+                }
                 $('#catSelect').append(catRow);
             }
         }
@@ -133,6 +139,7 @@ function edit() {
     var options = [
         parent.find('th.id'),
         parent.find('th.name'),
+        parent.find('th.address'),
         parent.find('th.description')
     ];
 
@@ -147,6 +154,6 @@ function edit() {
     $('#removeCategory').css('display', 'block');
     $('#uploadCategory').css('display', 'block');
 
-    $('#categoriesTable').css('display', 'none');
+    $('#farmsTable').css('display', 'none');
     $('#inputContainer').css('display', 'block');
 }
