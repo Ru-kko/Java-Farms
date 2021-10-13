@@ -1,11 +1,20 @@
+/**
+ *  @var 0 = Table
+ *  @var 1 = Adding
+ *  @var 2 = Editing
+ */
+const localState = 0;
+const domain = document.domain;
+
 $(document).ready(() =>{
+    console.log(domain);
     buld(); 
 })
 function buld(){
     $('#categoriesRows').empty();
     $.ajax({
         type: 'GET',
-        url: 'http://localhost:8080/api/Category',
+        url:  domain + '/api/Category' || 'http://localhost:8080/api/Category',
         success: (res) =>{
             res.forEach(i => {
                 const row = '<tr class="tableRow">' +
@@ -26,11 +35,24 @@ function edit() {
         parent.find('th.name').text(),
         parent.find('th.description').text()
     ];
-    console.log(options);
-    $('#idInput').css('display','block');
+    var inputs = [
+        $('#inputs div #idInput'),
+        $('#inputs div #nameInput'),
+        $('#inputs div #descriptionInput')
+    ];
+
+    for (let i = 0; i < options.length; i++) {
+        inputs[i].val(options[i]);
+        console.log(inputs[i]);
+    };
+
+    inputs[0].css('display','flex');
+
+    $('#addCategory').css('display','none');
+
+
 
     $('#categoriesTable').css('display','none');
     $('#inputContainer').css('display','block');
 
-    console.log("a");
 }
