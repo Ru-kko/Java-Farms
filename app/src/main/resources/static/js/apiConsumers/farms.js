@@ -4,6 +4,7 @@ var inputs = [
     $('#inputs div #idInput'),
     $('#inputs div #nameInput'),
     $('#inputs div #addressInput'),
+    $('#inputs div #exensionInput'),
     $('#inputs div #descriptionInput')
 ];
 
@@ -50,30 +51,32 @@ $(document).ready(() => {
     //         })
     // })
 
-    // $('#uploadCategory').click(() => {
-    //     if (used) return;
-    //     used = true;
-    //     $.ajax({
-    //         type: 'PUT',
-    //         url: domain + '/api/Category',
-    //         contentType: 'application/json',
-    //         data: JSON.stringify({
-    //             'id': parseInt(inputs[0].val()),
-    //             'name': inputs[1].val(),
-    //             'description': inputs[2].val()
-    //         })
-    //     })
-    //         .fail(() => {
-    //             alert('An unspected error');
-    //         })
-    //         .always(() => {
-    //             used = false;
-    //             build();
-    //             $('#categoriesTable').css('display', 'block');
-    //             $('#inputContainer').css('display', 'none');
-    //         })
-
-    // });
+    $('#uploadFram').click(() => {
+        if (used) return;
+        used = true;
+        $.ajax({
+            type: 'PUT',
+            url: domain + '/api/Category',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                'id': parseInt(inputs[0].val()),
+                'name': inputs[1].val(),
+                'address': inputs[2].val(),
+                'extension': parseInt(inputs[3].val()),
+                'description': inputs[4].val(),
+                'category':{'id':}
+            })
+        })
+            .fail(() => {
+                alert('An unspected error');
+            })
+            .always(() => {
+                used = false;
+                build();
+                $('#categoriesTable').css('display', 'block');
+                $('#inputContainer').css('display', 'none');
+            })
+    });
     // $('#addCategory').click(() => {
     //     if (used) return;
     //     used = true;
@@ -140,10 +143,10 @@ function edit() {
         parent.find('th.id'),
         parent.find('th.name'),
         parent.find('th.address'),
+        parent.find('th.extension'),
         parent.find('th.description')
     ];
-
-
+    console.log(options[3].text());
     for (let i = 0; i < options.length; i++) {
         inputs[i].val(options[i].text());
     };
