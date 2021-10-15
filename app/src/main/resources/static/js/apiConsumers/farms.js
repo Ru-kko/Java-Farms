@@ -27,44 +27,17 @@ $(document).ready(() => {
         }
     });
 
-    // $('#sumbitCategory').click(add);
+    $('#sumbitFarm').click(add);
 
-    // $('#removeCategory').click(() => {
-    //     if (used) return;
-    //     used = true;
-    //     $.ajax({
-    //         type: 'DELETE',
-    //         url: domain + '/api/Category',
-    //         contentType: 'application/json',
-    //         data: JSON.stringify({
-    //             'id': parseInt(inputs[0].val()),
-    //         })
-    //     })
-    //         .fail(() => {
-    //             alert('An unspected error');
-    //         })
-    //         .always(() => {
-    //             used = false;
-    //             build();
-    //             $('#categoriesTable').css('display', 'block');
-    //             $('#inputContainer').css('display', 'none');
-    //         })
-    // })
-
-    $('#uploadFram').click(() => {
+    $('#removeFram').click(() => {
         if (used) return;
         used = true;
         $.ajax({
-            type: 'PUT',
-            url: domain + '/api/Category',
+            type: 'DELETE',
+            url: domain + '/api/Farm',
             contentType: 'application/json',
             data: JSON.stringify({
                 'id': parseInt(inputs[0].val()),
-                'name': inputs[1].val(),
-                'address': inputs[2].val(),
-                'extension': parseInt(inputs[3].val()),
-                'description': inputs[4].val(),
-                'category':{'id':}
             })
         })
             .fail(() => {
@@ -73,36 +46,71 @@ $(document).ready(() => {
             .always(() => {
                 used = false;
                 build();
-                $('#categoriesTable').css('display', 'block');
+                $('#farmsTable').css('display', 'block');
+                $('#inputContainer').css('display', 'none');
+            })
+    })
+
+    $('#uploadFram').click(() => {
+        if (used) return;
+
+        used = true;
+        $.ajax({
+            type: 'PUT',
+            url: domain + '/api/Farm',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                'id': parseInt(inputs[0].val()),
+                'name': inputs[1].val(),
+                'address': inputs[2].val(),
+                'extension': parseInt(inputs[3].val()),
+                'description': inputs[4].val(),
+                'category':{
+                    'id':parseInt($('#catSelect').val())
+                }
+            })
+        })
+            .fail(() => {
+                alert('An unspected error');
+            })
+            .always(() => {
+                used = false;
+                build();
+                $('#farmsTable').css('display', 'block');
                 $('#inputContainer').css('display', 'none');
             })
     });
-    // $('#addCategory').click(() => {
-    //     if (used) return;
-    //     used = true;
-    //     $.ajax({
-    //         type: 'POST',
-    //         url: domain + '/api/Category',
-    //         contentType: 'application/json',
-    //         data: JSON.stringify({
-    //             'name': inputs[1].val(),
-    //             'description': inputs[2].val()
-    //         })
-    //     })
-    //         .fail(() => {
-    //             alert('An unspected error');
-    //         })
-    //         .always(() => {
-    //             used = false;
-    //             build();
-    //             $('#categoriesTable').css('display', 'block');
-    //             $('#inputContainer').css('display', 'none');
-    //         })
-    // });
+    $('#addFarm').click(() => {
+        if (used) return;
+        used = true;
+        $.ajax({
+            type: 'POST',
+            url: domain + '/api/Farm',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                'name': inputs[1].val(),
+                'address': inputs[2].val(),
+                'extension': parseInt(inputs[3].val()),
+                'description': inputs[4].val(),
+                'category':{
+                    'id':parseInt($('#catSelect').val())
+                }
+            })
+        })
+            .fail(() => {
+                alert('An unspected error');
+            })
+            .always(() => {
+                used = false;
+                build();
+                $('#farmsTable').css('display', 'block');
+                $('#inputContainer').css('display', 'none');
+            })
+    });
     build();
 })
 function build() {
-    $('#categoriesRows').empty();
+    $('#farmsRows').empty();
 
     $.ajax({
         type: 'GET',
@@ -123,20 +131,20 @@ function build() {
         }
     });
 }
-// function add() {
-//     $('#idInputG').css('display', 'none');
+function add() {
+    $('#idInputG').css('display', 'none');
 
-//     inputs.forEach(i => {
-//         i.val('');
-//     });
+    inputs.forEach(i => {
+        i.val('');
+    });
 
-//     $('#addCategory').css('display', 'block');
-//     $('#removeCategory').css('display', 'none');
-//     $('#uploadCategory').css('display', 'none');
+    $('#addFarm').css('display', 'block');
+    $('#removeFram').css('display', 'none');
+    $('#uploadFram').css('display', 'none');
 
-//     $('#categoriesTable').css('display', 'none');
-//     $('#inputContainer').css('display', 'block');
-// }
+    $('#farmsTable').css('display', 'none');
+    $('#inputContainer').css('display', 'block');
+}
 function edit() {
     var parent = $(this).parent().parent();
     var options = [
@@ -146,16 +154,15 @@ function edit() {
         parent.find('th.extension'),
         parent.find('th.description')
     ];
-    console.log(options[3].text());
     for (let i = 0; i < options.length; i++) {
         inputs[i].val(options[i].text());
     };
 
     inputs[0].css('display', 'flex');
 
-    $('#addCategory').css('display', 'none');
-    $('#removeCategory').css('display', 'block');
-    $('#uploadCategory').css('display', 'block');
+    $('#addFarm').css('display', 'none');
+    $('#removeFram').css('display', 'block');
+    $('#uploadFram').css('display', 'block');
 
     $('#farmsTable').css('display', 'none');
     $('#inputContainer').css('display', 'block');
