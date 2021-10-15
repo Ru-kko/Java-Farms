@@ -9,7 +9,7 @@ public class AppApplication extends SpringBootServletInitializer{
 
 	public static void main(String[] args) {
 		SpringApplication.run(AppApplication.class, args);
-		System.out.println("some");
+		System.out.println("\nListening in server port 8080\n");
 	}
 
 }
