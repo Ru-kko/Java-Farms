@@ -32,4 +32,9 @@ public class viewsController {
         model.addAttribute("title", "Categories");
         return "categories";
     }
+    @GetMapping("/reservations")
+    public String reservationsView(Model model){
+        model.addAttribute("title", "Reservations");
+        return "reservations";
+    }
 }
