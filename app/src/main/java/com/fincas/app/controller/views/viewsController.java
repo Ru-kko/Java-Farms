@@ -9,7 +9,7 @@ public class viewsController {
     
     @GetMapping("/")
     public String homeView(Model model){
-        model.addAttribute("title", "Reto3");
+        model.addAttribute("title", "Reto 3");
         return "home";
     }
     @GetMapping("/farms")
