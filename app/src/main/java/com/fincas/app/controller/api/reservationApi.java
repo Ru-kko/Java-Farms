@@ -53,22 +53,22 @@ public class reservationApi {
     public void addReservation(@RequestBody reservationEntity body){
         reservationEntity exist = reservService.saveReservation(body);
         if(exist == null){
-            throw new unaceptableException("There is already a Reservation with the id: " + body.getId());
+            throw new unaceptableException("There is already a Reservation with the id: " + body.getIdReservation());
         }
     }
     @PutMapping
     public void update(@RequestBody reservationEntity body){
         reservationEntity exsist = reservService.update(body);
         if(exsist == null){
-            throw new notFoundException("Resevation with id: " + body.getId() + "not exist");
+            throw new notFoundException("Resevation with id: " + body.getIdReservation() + "not exist");
         }
     }
     @DeleteMapping
     public void delete(@RequestBody reservationEntity body){
-        boolean isDeleted = reservService.delete(body.getId());
+        boolean isDeleted = reservService.delete(body.getIdReservation());
 
         if(!isDeleted){
-            throw new notFoundException("Reservation with id: " + body.getId() + "not exist");
+            throw new notFoundException("Reservation with id: " + body.getIdReservation() + "not exist");
         }
     }
 }

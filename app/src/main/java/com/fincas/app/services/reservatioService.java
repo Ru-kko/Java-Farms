@@ -28,8 +28,8 @@ public class reservatioService {
     }
 
     public reservationEntity saveReservation(reservationEntity reservation){
-        if(reservation.getId() != null){
-            Optional<reservationEntity> opReserv = resRep.getReservationById(reservation.getId());
+        if(reservation.getIdReservation() != null){
+            Optional<reservationEntity> opReserv = resRep.getReservationById(reservation.getIdReservation());
             if(opReserv.isEmpty()){
                 return resRep.save(reservation);        
             }
@@ -39,8 +39,8 @@ public class reservatioService {
     }
 
     public reservationEntity update(reservationEntity reservation){
-        if(reservation.getId() != null){
-            Optional<reservationEntity> opReserv = resRep.getReservationById(reservation.getId());
+        if(reservation.getIdReservation() != null){
+            Optional<reservationEntity> opReserv = resRep.getReservationById(reservation.getIdReservation());
 
             if(opReserv.isPresent()){
                 reservationEntity thisReserv = opReserv.get();

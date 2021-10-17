@@ -19,16 +19,16 @@ import com.fincas.app.crud.farms.farmEntity;
 public class reservationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idReservation;
     
     @ManyToOne
-    @JoinColumn(name = "client")
-    @JsonIgnoreProperties("reservations")
+    @JoinColumn(name = "idClient")
+    @JsonIgnoreProperties({"messages", "reservations"})
     private clientEntity client;
 
     @ManyToOne
-    @JoinColumn(name = "farm")
-    @JsonIgnoreProperties("reservations")
+    @JoinColumn(name = "id")
+    @JsonIgnoreProperties({"messages", "reservations"})
     private farmEntity farm;
 
     private Date startDate;
@@ -43,11 +43,11 @@ public class reservationEntity {
     /** Empty constructor */
     public reservationEntity(){}
 
-    public Long getId() {
-        return id;
+    public Long getIdReservation() {
+        return idReservation;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setIdReservation(Long idReservation) {
+        this.idReservation = idReservation;
     }
     public clientEntity getClient() {
         return client;
