@@ -19,7 +19,7 @@ import com.fincas.app.crud.reservations.reservationEntity;
 public class clientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idClient;
 
     private String Name;
     private String Email;   
@@ -43,10 +43,22 @@ public class clientEntity {
     public clientEntity(){}
     
     public Long getId() {
-        return id;
+        return idClient;
     }
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long idClient) {
+        this.idClient = idClient;
+    }
+    public List<reservationEntity> getReservations() {
+        return reservations;
+    }
+    public List<messageEntity> getMessages() {
+        return messages;
+    }
+    public void setMessages(List<messageEntity> messages) {
+        this.messages = messages;
+    }
+    public void setReservations(List<reservationEntity> reservations) {
+        this.reservations = reservations;
     }
     public String getName() {
         return Name;

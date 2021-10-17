@@ -21,7 +21,7 @@ $(document).ready(() => {
             url: domain + '/api/Client',
             contentType: 'application/json',
             data: JSON.stringify({
-                'id': parseInt(inputs[0].val()),
+                'idClient': parseInt(inputs[0].val()),
             })
         })
             .fail(() => {
@@ -44,7 +44,7 @@ $(document).ready(() => {
             url: domain + '/api/Client',
             contentType: 'application/json',
             data: JSON.stringify({
-                'id': parseInt(inputs[0].val()),
+                'idClient': parseInt(inputs[0].val()),
                 'name': inputs[1].val(),
                 'password': inputs[2].val(),
                 'email':inputs[3].val(),
