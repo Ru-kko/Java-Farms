@@ -3,6 +3,7 @@ package com.fincas.app.crud.clients;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ import com.fincas.app.crud.reservations.reservationEntity;
 @Table(name="CLIENTS")
 public class clientEntity {
     @Id
+    @Column(name = "idClient")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idClient;
 

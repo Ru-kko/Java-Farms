@@ -50,6 +50,7 @@ public class messageApi {
     @PostMapping
     public void addMessage(@RequestBody messageEntity body){
         messageEntity exist = msgService.saveMessage(body);
+        System.out.println(body.getClient().getId());
         if(exist == null){
             throw new unaceptableException("There is already a message with the id: " + body.getId());
         }

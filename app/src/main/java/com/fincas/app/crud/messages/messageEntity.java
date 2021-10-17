@@ -1,5 +1,6 @@
 package com.fincas.app.crud.messages;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,8 +17,9 @@ import com.fincas.app.crud.farms.farmEntity;
 @Table(name = "MESSAGES")
 public class messageEntity {
     @Id
+    @Column(name = "idMessage")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idMessage;
 
     private String messageText;
 
@@ -41,10 +43,10 @@ public class messageEntity {
     public messageEntity(){}
 
     public Long getId() {
-        return id;
+        return idMessage;
     }
     public void setId(long id) {
-        this.id = id;
+        this.idMessage = id;
     }
 
     public farmEntity getFarm() {
