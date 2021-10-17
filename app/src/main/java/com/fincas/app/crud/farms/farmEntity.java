@@ -48,7 +48,6 @@ public class farmEntity {
         this.name = name;
         this.description = description;
     }
-
     /** Empty constructor */
     public farmEntity(){}
     
@@ -61,7 +60,19 @@ public class farmEntity {
     public String getDescription() {
         return description;
     }
+    public List<messageEntity> getMessages() {
+        return messages;
+    }
+    public List<reservationEntity> getReservations() {
+        return reservations;
+    }
 
+    public void setReservations(List<reservationEntity> reservations) {
+        this.reservations = reservations;
+    }
+    public void setMessages(List<messageEntity> messages) {
+        this.messages = messages;
+    }
     public void setDescription(String description) {
         this.description = description;
     }

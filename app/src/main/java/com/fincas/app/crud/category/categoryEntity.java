@@ -39,6 +39,12 @@ public class categoryEntity {
     public void setId(Long id) {
         this.id = id;
     }
+    public List<farmEntity> getFarms() {
+        return farms;
+    }
+    public void setFarms(List<farmEntity> farms) {
+        this.farms = farms;
+    }
     public String getName() {
         return name;
     }
