@@ -55,7 +55,7 @@ public class messageApi {
     public void addMessage(@RequestBody messageEntity body) {
         messageEntity exist = msgService.saveMessage(body);
         if (exist == null) {
-            throw new unaceptableException("There is already a message with the id: " + body.getId());
+            throw new unaceptableException("There is already a message with the id: " + body.getIdMessage());
         }
     }
 
@@ -63,16 +63,16 @@ public class messageApi {
     public void updaate(@RequestBody messageEntity body) {
         messageEntity exsist = msgService.update(body);
         if (exsist == null) {
-            throw new notFoundException("Message with id: " + body.getId() + " not exist");
+            throw new notFoundException("Message with id: " + body.getIdMessage() + " not exist");
         }
     }
 
     @DeleteMapping
     public void delete(@RequestBody messageEntity body) {
-        boolean isDeleted = msgService.delete(body.getId());
+        boolean isDeleted = msgService.delete(body.getIdMessage());
 
         if (!isDeleted) {
-            throw new notFoundException("Message with id: " + body.getId() + " not exist");
+            throw new notFoundException("Message with id: " + body.getIdMessage() + " not exist");
         }
     }
 }

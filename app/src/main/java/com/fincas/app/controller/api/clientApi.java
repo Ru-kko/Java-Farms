@@ -47,7 +47,7 @@ public class clientApi {
     public void addClient(@RequestBody clientEntity body){
         clientEntity exist = clientService.saveClient(body);
         if(exist == null){
-            throw new unaceptableException("There is already a client with the id: " + body.getId());
+            throw new unaceptableException("There is already a client with the id: " + body.getIdClient());
         }
     }
     @GetMapping List<clientEntity> getEveryClients(){
@@ -57,15 +57,15 @@ public class clientApi {
     public void update(@RequestBody clientEntity body){
         clientEntity exsist = clientService.update(body);
         if(exsist == null){
-            throw new notFoundException("Client with id: " + body.getId() + " not exist");
+            throw new notFoundException("Client with id: " + body.getIdClient() + " not exist");
         }
     }
     @DeleteMapping
     public void delete(@RequestBody clientEntity body){
-        boolean isDeleted = clientService.delete(body.getId());
+        boolean isDeleted = clientService.delete(body.getIdClient());
 
         if(!isDeleted){
-            throw new notFoundException("Client with id: " + body.getId() + "not exist");
+            throw new notFoundException("Client with id: " + body.getIdClient() + "not exist");
         }
     }
 }

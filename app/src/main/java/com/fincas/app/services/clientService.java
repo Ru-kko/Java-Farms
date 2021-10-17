@@ -23,8 +23,8 @@ public class clientService{
     }
     
     public clientEntity saveClient(clientEntity client){
-        if(client.getId() != null){
-            Optional<clientEntity> thisClient = clientRep.getClientByID(client.getId());
+        if(client.getIdClient() != null){
+            Optional<clientEntity> thisClient = clientRep.getClientByID(client.getIdClient());
 
             if(thisClient.isEmpty()){
                 return clientRep.save(client);
@@ -36,8 +36,8 @@ public class clientService{
     }
     
     public clientEntity update(clientEntity client){
-        if(client.getId() != null){
-            Optional<clientEntity> opClient = clientRep.getClientByID(client.getId());
+        if(client.getIdClient() != null){
+            Optional<clientEntity> opClient = clientRep.getClientByID(client.getIdClient());
             if(opClient.isPresent()){
                 clientEntity thisClient = opClient.get();
                 if(client.getAge() != null){

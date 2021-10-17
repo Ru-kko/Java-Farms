@@ -24,13 +24,13 @@ public class messageEntity {
     private String messageText;
 
     @ManyToOne
-    @JoinColumn(name = "farm")
-    @JsonIgnoreProperties("messages")
+    @JoinColumn(name = "id")
+    @JsonIgnoreProperties({"messages", "reservations"})
     private farmEntity farm;
 
     @ManyToOne
-    @JoinColumn(name = "client")
-    @JsonIgnoreProperties("messages")
+    @JoinColumn(name = "idClient")
+    @JsonIgnoreProperties({"messages", "reservations"})
     private clientEntity client;
 
     public messageEntity(String messageText, farmEntity farm, clientEntity client) {
@@ -42,10 +42,10 @@ public class messageEntity {
     /** Empty constructor */
     public messageEntity(){}
 
-    public Long getId() {
+    public Long getIdMessage() {
         return idMessage;
     }
-    public void setId(long id) {
+    public void setIdMessage(long id) {
         this.idMessage = id;
     }
 

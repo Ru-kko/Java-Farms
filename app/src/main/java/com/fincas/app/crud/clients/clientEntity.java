@@ -44,10 +44,10 @@ public class clientEntity {
     /** Empty constructor */
     public clientEntity(){}
     
-    public Long getId() {
+    public Long getIdClient() {
         return idClient;
     }
-    public void setId(Long idClient) {
+    public void setIdClient(Long idClient) {
         this.idClient = idClient;
     }
     public List<reservationEntity> getReservations() {

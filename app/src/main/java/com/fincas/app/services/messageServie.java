@@ -23,8 +23,8 @@ public class messageServie {
     }
 
     public messageEntity saveMessage(messageEntity message) {
-        if (message.getId() != null) {
-            Optional<messageEntity> thisMessage = msgRepo.getMessageByID(message.getId());
+        if (message.getIdMessage() != null) {
+            Optional<messageEntity> thisMessage = msgRepo.getMessageByID(message.getIdMessage());
             if (thisMessage.isEmpty()) {
                 return msgRepo.save(message);
             }
@@ -34,8 +34,8 @@ public class messageServie {
     }
 
     public messageEntity update(messageEntity message){
-        if(message.getId() != null){
-            Optional<messageEntity> opMessage = msgRepo.getMessageByID(message.getId());
+        if(message.getIdMessage() != null){
+            Optional<messageEntity> opMessage = msgRepo.getMessageByID(message.getIdMessage());
             if(opMessage.isPresent()){
                 messageEntity thisMessage = opMessage.get();
                 if(message.getMessageText() != null){
