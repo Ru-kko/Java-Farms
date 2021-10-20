@@ -98,7 +98,7 @@ function build() {
             console.log(res)
             res.forEach(i => {
                 const row = '<tr class="tableRow">' +
-                    `<th scope="row" class="id">${i.id}</th>` +
+                    `<th scope="row" class="id">${i.idClient}</th>` +
                     `<th scope="row" class="name">${i.name}</th>` +
                     `<th scope="row" class="password">${i.password}</th>` +
                     `<th scope="row" class="email">${i.email}</th>` +
