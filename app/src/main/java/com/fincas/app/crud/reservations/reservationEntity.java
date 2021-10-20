@@ -31,14 +31,14 @@ public class reservationEntity {
     @JsonIgnoreProperties("reservations")
     private farmEntity farm;
 
-    private Date fristDate;
-    private Date lastDate;
+    private Date startDate;
+    private Date devolutionDate;
 
-    public reservationEntity(clientEntity client, farmEntity farm, Date fristDate, Date lastDate) {
+    public reservationEntity(clientEntity client, farmEntity farm, Date fristDate, Date devolutionDate) {
         this.client = client;
         this.farm = farm;
-        this.fristDate = fristDate;
-        this.lastDate = lastDate;
+        this.startDate = fristDate;
+        this.devolutionDate = devolutionDate;
     }
     /** Empty constructor */
     public reservationEntity(){}
@@ -61,16 +61,16 @@ public class reservationEntity {
     public void setFarm(farmEntity farm) {
         this.farm = farm;
     }
-    public Date getFristDate() {
-        return fristDate;
+    public Date getStartDate() {
+        return startDate;
     }
-    public void setFristDate(Date fristDate) {
-        this.fristDate = fristDate;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
-    public Date getLastDate() {
-        return lastDate;
+    public Date getDevolutionDate() {
+        return devolutionDate;
     }
-    public void setLastDate(Date lastDate) {
-        this.lastDate = lastDate;
+    public void setDevolutionDate(Date devolutionDate) {
+        this.devolutionDate = devolutionDate;
     }
 }

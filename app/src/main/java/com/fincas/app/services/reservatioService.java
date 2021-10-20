@@ -50,11 +50,11 @@ public class reservatioService {
                 if(reservation.getFarm() != null){
                     thisReserv.setFarm(reservation.getFarm());
                 }
-                if(reservation.getFristDate() != null){
-                    thisReserv.setFristDate(reservation.getFristDate());
+                if(reservation.getStartDate() != null){
+                    thisReserv.setStartDate(reservation.getStartDate());
                 }
-                if(reservation.getLastDate() != null){
-                    thisReserv.setLastDate(reservation.getLastDate());
+                if(reservation.getDevolutionDate() != null){
+                    thisReserv.setDevolutionDate(reservation.getDevolutionDate());
                 }
                 return resRep.save(thisReserv);
             }
