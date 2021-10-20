@@ -21,6 +21,9 @@ public class reservationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservation;
     
+    private Date startDate;
+    private Date devolutionDate;
+
     @ManyToOne
     @JoinColumn(name = "idClient")
     @JsonIgnoreProperties({"messages", "reservations"})
@@ -30,9 +33,6 @@ public class reservationEntity {
     @JoinColumn(name = "id")
     @JsonIgnoreProperties({"messages", "reservations"})
     private farmEntity farm;
-
-    private Date startDate;
-    private Date devolutionDate;
 
     public reservationEntity(clientEntity client, farmEntity farm, Date fristDate, Date devolutionDate) {
         this.client = client;

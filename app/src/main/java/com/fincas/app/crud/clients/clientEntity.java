@@ -23,19 +23,19 @@ public class clientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idClient;
 
-    private String Name;
     private String Email;   
-    private Integer Age;
     private String password;
-
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
-    @JsonIgnoreProperties("client")
-    private List<reservationEntity> reservations;
-
+    private String Name;
+    private Integer Age;
+    
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
     @JsonIgnoreProperties("client")
     private List<messageEntity> messages;
-
+    
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
+    @JsonIgnoreProperties("client")
+    private List<reservationEntity> reservations;
+    
     public clientEntity(String name, String email, Integer age) {
         Name = name;
         Email = email;

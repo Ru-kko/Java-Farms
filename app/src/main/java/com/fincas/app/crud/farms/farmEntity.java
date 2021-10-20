@@ -24,24 +24,24 @@ public class farmEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
+    private String name;
     private String address;
     private Integer extension;
-    private String name;
     private String description;  
-
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
-    @JsonIgnoreProperties("farm")
-    private List<reservationEntity> reservations;
-
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
-    @JsonIgnoreProperties("farm")
-    private List<messageEntity> messages;
     
     @ManyToOne
     @JoinColumn(name = "category")
     @JsonIgnoreProperties("farms")
     private categoryEntity category;
-
+    
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
+    @JsonIgnoreProperties("farm")
+    private List<messageEntity> messages;
+    
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
+    @JsonIgnoreProperties("farm")
+    private List<reservationEntity> reservations;
+    
     public farmEntity(String address, Integer extension, String name, String description) {
         this.address = address;
         this.extension = extension;
