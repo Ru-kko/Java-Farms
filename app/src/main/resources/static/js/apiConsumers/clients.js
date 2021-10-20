@@ -1,5 +1,3 @@
-const domain = document.domain == 'localhost' ? 'http://localhost:8080' : document.domain;
-
 var inputs = [
     $('#inputs div #idInput'),
     $('#inputs div #NameInput'),
@@ -18,7 +16,7 @@ $(document).ready(() => {
         used = true;
         $.ajax({
             type: 'DELETE',
-            url: domain + '/api/Client',
+            url: '/api/Client',
             contentType: 'application/json',
             data: JSON.stringify({
                 'idClient': parseInt(inputs[0].val()),
@@ -41,7 +39,7 @@ $(document).ready(() => {
         used = true;
         $.ajax({
             type: 'PUT',
-            url: domain + '/api/Client',
+            url: '/api/Client',
             contentType: 'application/json',
             data: JSON.stringify({
                 'idClient': parseInt(inputs[0].val()),
@@ -66,7 +64,7 @@ $(document).ready(() => {
         used = true;
         $.ajax({
             type: 'POST',
-            url: domain + '/api/Client',
+            url: '/api/Client',
             contentType: 'application/json',
             data: JSON.stringify({
                 'name': inputs[1].val(),
@@ -95,7 +93,7 @@ function build() {
 
     $.ajax({
         type: 'GET',
-        url: domain + '/api/Client',
+        url: '/api/Client',
         success: (res) => {
             console.log(res)
             res.forEach(i => {

@@ -1,5 +1,3 @@
-const domain = document.domain == 'localhost' ? 'http://localhost:8080' : document.domain;
-
 var inputs = [
     $('#inputs div #idInput'),
     $('#inputs div #nameInput'),
@@ -16,7 +14,7 @@ $(document).ready(() => {
         used = true;
         $.ajax({
             type: 'DELETE',
-            url: domain + '/api/Category',
+            url: '/api/Category',
             contentType: 'application/json',
             data: JSON.stringify({
                 'id': parseInt(inputs[0].val()),
@@ -38,7 +36,7 @@ $(document).ready(() => {
         used = true;
         $.ajax({
             type: 'PUT',
-            url: domain + '/api/Category',
+            url: '/api/Category',
             contentType: 'application/json',
             data: JSON.stringify({
                 'id': parseInt(inputs[0].val()),
@@ -62,7 +60,7 @@ $(document).ready(() => {
         used = true;
         $.ajax({
             type: 'POST',
-            url: domain + '/api/Category',
+            url: '/api/Category',
             contentType: 'application/json',
             data: JSON.stringify({
                 'name': inputs[1].val(),
@@ -86,7 +84,7 @@ function build() {
 
     $.ajax({
         type: 'GET',
-        url: domain + '/api/Category',
+        url: '/api/Category',
         success: (res) => {
             res.forEach(i => {
                 const row = '<tr class="tableRow">' +
