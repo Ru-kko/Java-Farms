@@ -35,6 +35,16 @@ public class categoryApi {
     public categoryEntity createCategory(@RequestBody categoryEntity body){
         return catService.saveCategory(body);
     }
+
+    @PostMapping(value = "all")
+    public categoryEntity postCatogoryByAll(@RequestBody categoryEntity body){
+        return catService.saveCategory(body);
+    }
+    @GetMapping(value = "save")
+    public List<categoryEntity>  getAllCategoresBySave(){
+        return catService.getAllCategories();
+    }
+
     // Normal Request
     @GetMapping("/{id}")
     public categoryEntity getFarm(@PathVariable long id){

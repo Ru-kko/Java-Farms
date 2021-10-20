@@ -36,6 +36,15 @@ public class messageApi {
         return msgService.saveMessage(body);
     }
 
+    @PostMapping(value = "all")
+    public messageEntity postMessageByAll(@RequestBody messageEntity body){
+        return msgService.saveMessage(body);
+    }
+    @GetMapping(value = "save")
+    public List<messageEntity> getAllMessagesBySave(){
+        return msgService.getAllMessages();
+    }
+
     // Normal Request
     @GetMapping("/{id}")
     public messageEntity getFarm(@PathVariable long id) {
