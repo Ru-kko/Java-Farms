@@ -1,6 +1,6 @@
 package com.fincas.app.crud.reservations;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,8 +21,8 @@ public class reservationEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idReservation;
     
-    private Date startDate;
-    private Date devolutionDate;
+    private Timestamp startDate;
+    private Timestamp devolutionDate;
     
     @ManyToOne
     @JoinColumn(name = "id")
@@ -34,12 +34,15 @@ public class reservationEntity {
     @JsonIgnoreProperties({"messages", "reservations"})
     private clientEntity client;
 
-    public reservationEntity(clientEntity client, farmEntity farm, Date fristDate, Date devolutionDate) {
+    private Float score;
+
+    public reservationEntity(clientEntity client, farmEntity farm, Timestamp fristDate, Timestamp devolutionDate) {
         this.client = client;
         this.farm = farm;
         this.startDate = fristDate;
         this.devolutionDate = devolutionDate;
     }
+    
     /** Empty constructor */
     public reservationEntity(){}
 
@@ -61,16 +64,22 @@ public class reservationEntity {
     public void setFarm(farmEntity farm) {
         this.farm = farm;
     }
-    public Date getStartDate() {
+    public Float getScore() {
+        return score;
+    }
+    public void setScore(Float score) {
+        this.score = score;
+    }
+    public Timestamp getStartDate() {
         return startDate;
     }
-    public void setStartDate(Date startDate) {
+    public void setStartDate(Timestamp startDate) {
         this.startDate = startDate;
     }
-    public Date getDevolutionDate() {
+    public Timestamp getDevolutionDate() {
         return devolutionDate;
     }
-    public void setDevolutionDate(Date devolutionDate) {
+    public void setDevolutionDate(Timestamp devolutionDate) {
         this.devolutionDate = devolutionDate;
     }
 }
