@@ -23,10 +23,10 @@ public class clientEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idClient;
 
-    private String Email;   
+    private String email;   
     private String password;
-    private String Name;
-    private Integer Age;
+    private String name;
+    private Integer age;
     
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "client")
     @JsonIgnoreProperties("client")
@@ -37,9 +37,9 @@ public class clientEntity {
     private List<reservationEntity> reservations;
     
     public clientEntity(String name, String email, Integer age) {
-        Name = name;
-        Email = email;
-        Age = age;
+        this.name = name;
+        this.email = email;
+        this.age = age;
     }
     /** Empty constructor */
     public clientEntity(){}
@@ -63,22 +63,22 @@ public class clientEntity {
         this.reservations = reservations;
     }
     public String getName() {
-        return Name;
+        return name;
     }
     public void setName(String name) {
-        this.Name = name;
+        this.name = name;
     }
     public String getEmail() {
-        return Email;
+        return email;
     }
     public void setEmail(String email) {
-        this.Email = email;
+        this.email = email;
     }
     public Integer getAge() {
-        return Age;
+        return age;
     }
     public void setAge(Integer age) {
-        this.Age = age;
+        this.age = age;
     }
     public String getPassword() {
         return password;

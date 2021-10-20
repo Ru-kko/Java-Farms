@@ -23,16 +23,16 @@ public class reservationEntity {
     
     private Date startDate;
     private Date devolutionDate;
+    
+    @ManyToOne
+    @JoinColumn(name = "id")
+    @JsonIgnoreProperties({"messages", "reservations"})
+    private farmEntity farm;
 
     @ManyToOne
     @JoinColumn(name = "idClient")
     @JsonIgnoreProperties({"messages", "reservations"})
     private clientEntity client;
-
-    @ManyToOne
-    @JoinColumn(name = "id")
-    @JsonIgnoreProperties({"messages", "reservations"})
-    private farmEntity farm;
 
     public reservationEntity(clientEntity client, farmEntity farm, Date fristDate, Date devolutionDate) {
         this.client = client;
