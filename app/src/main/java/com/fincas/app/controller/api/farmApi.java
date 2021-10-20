@@ -35,6 +35,16 @@ public class farmApi {
     public farmEntity createFarm(@RequestBody farmEntity body){
         return farmService.saveFarm(body);
     }
+
+    @PostMapping(value = "all")
+    public farmEntity postFarmByAll(@RequestBody farmEntity body){
+        return farmService.saveFarm(body);
+    }
+    @GetMapping(value = "save")
+    public List<farmEntity> getAllFarmsBySave(){
+        return farmService.getAllFarms();
+    }
+
     // Normal request
     @GetMapping("/{id}")
     public farmEntity getFarm(@PathVariable long id){

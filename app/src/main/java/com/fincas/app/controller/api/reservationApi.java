@@ -36,6 +36,15 @@ public class reservationApi {
         return reservService.saveReservation(body);
     }
 
+    @PostMapping(value = "all")
+    public reservationEntity postReservationsByAll(@RequestBody reservationEntity body){
+        return reservService.saveReservation(body);
+    }
+    @GetMapping(value = "save")
+    public List<reservationEntity> getAllReservationsBySave(){
+        return reservService.getAllReservations();
+    }
+
     // Normal Request
     @GetMapping("/{id}")
     public reservationEntity getReservation(@PathVariable long id) {

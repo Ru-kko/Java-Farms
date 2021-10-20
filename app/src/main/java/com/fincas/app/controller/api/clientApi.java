@@ -34,6 +34,15 @@ public class clientApi {
     public clientEntity createClient(@RequestBody clientEntity body){
         return clientService.saveClient(body);
     }
+    @PostMapping(value = "all")
+    public clientEntity postClientByAll(@RequestBody clientEntity body){
+        return clientService.saveClient(body);
+    }
+    @GetMapping(value = "save")
+    public List<clientEntity> getAllClientsBySave(){
+        return clientService.getAllClients();
+    }
+
     // Normal Request
     @GetMapping("/{id}")
     public clientEntity getFarm(@PathVariable long id){
