@@ -2,6 +2,7 @@ package com.fincas.app.crud.reservations;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,7 +24,9 @@ public class reservationEntity {
     
     private Timestamp startDate;
     private Timestamp devolutionDate;
-    private String status;
+
+    @Column(columnDefinition = "varchar(20) default 'created'")
+    private String status = "created";
     
     @ManyToOne
     @JoinColumn(name = "id")
