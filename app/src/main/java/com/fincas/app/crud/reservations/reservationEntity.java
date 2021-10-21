@@ -27,7 +27,7 @@ public class reservationEntity {
     
     @ManyToOne
     @JoinColumn(name = "id")
-    @JsonIgnoreProperties({"messages", "reservations"})
+    @JsonIgnoreProperties({"reservations"})
     private farmEntity farm;
 
     @ManyToOne
