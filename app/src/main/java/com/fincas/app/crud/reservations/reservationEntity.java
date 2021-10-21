@@ -23,6 +23,7 @@ public class reservationEntity {
     
     private Timestamp startDate;
     private Timestamp devolutionDate;
+    private String status;
     
     @ManyToOne
     @JoinColumn(name = "id")
@@ -42,7 +43,7 @@ public class reservationEntity {
         this.startDate = fristDate;
         this.devolutionDate = devolutionDate;
     }
-    
+
     /** Empty constructor */
     public reservationEntity(){}
 
@@ -63,6 +64,13 @@ public class reservationEntity {
     }
     public void setFarm(farmEntity farm) {
         this.farm = farm;
+    }
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
     public Float getScore() {
         return score;
