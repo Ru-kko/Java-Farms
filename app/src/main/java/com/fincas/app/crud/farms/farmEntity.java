@@ -35,7 +35,7 @@ public class farmEntity {
     private categoryEntity category;
     
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
-    @JsonIgnoreProperties("farm")
+    @JsonIgnoreProperties({"farm", "client"})
     private List<messageEntity> messages;
     
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "farm")
