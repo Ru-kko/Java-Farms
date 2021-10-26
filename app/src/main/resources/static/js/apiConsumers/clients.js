@@ -95,7 +95,6 @@ function build() {
         type: 'GET',
         url: '/api/Client',
         success: (res) => {
-            console.log(res)
             res.forEach(i => {
                 const row = '<tr class="tableRow">' +
                     `<th scope="row" class="id">${i.idClient}</th>` +
