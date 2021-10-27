@@ -1,6 +1,7 @@
 var inputs = [
     $('#inputs div #idInput'),
-    $('#textInput')
+    $('#StartInput'),
+    $('#EndInput')
 ];
 
 $(document).ready(() => {
@@ -37,7 +38,7 @@ $(document).ready(() => {
         }
     });
 
-    $('#sumbitMessage').click(add);
+    $('#submitReservations').click(add);
 
     $('#removeMessage').click(() => {
         if (used) return;
@@ -61,17 +62,18 @@ $(document).ready(() => {
             })
     })
 
-    $('#uploadMessage').click(() => {
+    $('#uploadReservation').click(() => {
         if (used) return;
 
         used = true;
         $.ajax({
             type: 'PUT',
-            url: '/api/Message',
+            url: '/api/Reservation',
             contentType: 'application/json',
             data: JSON.stringify({
-                'idMessage': parseInt(inputs[0].val()),
-                'messageText': inputs[1].val(),
+                'idReservation': parseInt(inputs[0].val()),
+                'startDate': inputs[1].val(),
+                'devolutionDate': inputs[2].val(),
                 'client':{
                     'idClient':parseInt($('#clientSelect').val())
                 },
@@ -120,20 +122,21 @@ $(document).ready(() => {
     build();
 })
 function build() {
-    $('#messagesRows').empty();
+    $('#reservationsRows').empty();
 
     $.ajax({
         type: 'GET',
-        url: '/api/Message',
+        url: '/api/Reservation',
         success: (res) => {
             res.forEach(i => {
                 const row = '<tr class="tableRow">' + 
-                    `<th scope="row" class="id">${i.idMessage}</th>` +
-                    `<th scope="row" class="text">${i.messageText}</th>` +
-                    `<th scope="row" class="client">${i.client.name}</th>` +
+                    `<th scope="row" class="id">${i.idReservation}</th>` +
+                    `<th scope="row" class="startDate">${i.startDate.slice(0,10)}</th>` +
+                    `<th scope="row" class="endDate">${i.devolutionDate.slice(0,10)}</th>` +
                     `<th scope="row" class="farm">${i.farm.name}</th>` +
+                    `<th scope="row" class="client">${i.client.name}</th>` +
                     '<td class="edit"><a class="btn btn-secondary btn-sm btn-edit">edit</a></td></tr>';
-                $('#messagesRows').append(row);
+                $('#reservationsRows').append(row);
             });
             $('td a.btn-edit').click(edit);
         }
@@ -157,7 +160,8 @@ function edit() {
     var parent = $(this).parent().parent();
     var options = [
         parent.find('th.id'),
-        parent.find('th.text')
+        parent.find('th.startDate'),
+        parent.find('th.endDate')
     ];
     for (let i = 0; i < options.length; i++) {
         inputs[i].val(options[i].text());
@@ -165,10 +169,10 @@ function edit() {
 
     inputs[0].css('display', 'flex');
 
-    $('#addMessage').css('display', 'none');
-    $('#removeMessage').css('display', 'block');
-    $('#uploadMessage').css('display', 'block');
+    $('#addReservation').css('display', 'none');
+    $('#removeReservation').css('display', 'block');
+    $('#uploadReservation').css('display', 'block');
 
-    $('#messagesTable').css('display', 'none');
+    $('#reservationTable').css('display', 'none');
     $('#inputContainer').css('display', 'block');
 }
