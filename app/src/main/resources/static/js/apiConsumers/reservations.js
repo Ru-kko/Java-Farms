@@ -40,15 +40,15 @@ $(document).ready(() => {
 
     $('#submitReservations').click(add);
 
-    $('#removeMessage').click(() => {
+    $('#removeReservation').click(() => {
         if (used) return;
         used = true;
         $.ajax({
             type: 'DELETE',
-            url: '/api/Message',
+            url: '/api/Reservation',
             contentType: 'application/json',
             data: JSON.stringify({
-                'idMessage': parseInt(inputs[0].val())
+                'idReservation': parseInt(inputs[0].val())
             })
         })
             .fail(() => {
@@ -57,7 +57,7 @@ $(document).ready(() => {
             .always(() => {
                 used = false;
                 build();
-                $('#messagesTable').css('display', 'block');
+                $('#reservationTable').css('display', 'block');
                 $('#inputContainer').css('display', 'none');
             })
     })
@@ -88,19 +88,20 @@ $(document).ready(() => {
             .always(() => {
                 used = false;
                 build();
-                $('#messagesTable').css('display', 'block');
+                $('#reservationTable').css('display', 'block');
                 $('#inputContainer').css('display', 'none');
             })
     });
-    $('#addMessage').click(() => {
+    $('#addReservation').click(() => {
         if (used) return;
         used = true;
         $.ajax({
             type: 'POST',
-            url: '/api/Message',
+            url: '/api/Reservation',
             contentType: 'application/json',
             data: JSON.stringify({
-                'messageText': inputs[1].val(),
+                'startDate': inputs[1].val(),
+                'devolutionDate': inputs[2].val(),
                 'client':{
                     'idClient':parseInt($('#clientSelect').val())
                 },
@@ -115,7 +116,7 @@ $(document).ready(() => {
             .always(() => {
                 used = false;
                 build();
-                $('#messagesTable').css('display', 'block');
+                $('#reservationTable').css('display', 'block');
                 $('#inputContainer').css('display', 'none');
             })
     });
@@ -149,11 +150,11 @@ function add() {
         i.val('');
     });
 
-    $('#addMessage').css('display', 'block');
-    $('#removeMessage').css('display', 'none');
-    $('#uploadMessage').css('display', 'none');
+    $('#addReservation').css('display', 'block');
+    $('#removeReservation').css('display', 'none');
+    $('#uploadReservation').css('display', 'none');
 
-    $('#messagesTable').css('display', 'none');
+    $('#reservationTable').css('display', 'none');
     $('#inputContainer').css('display', 'block');
 }
 function edit() {
