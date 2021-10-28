@@ -29,27 +29,6 @@ public class categoryApi {
     @Autowired
     private categoryService catService;
 
-    @GetMapping(value = "all")
-    public List<categoryEntity> getAllCatogories(){
-        return catService.getAllCategories();
-    }
-    @PostMapping(value = "save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public categoryEntity createCategory(@RequestBody categoryEntity body){
-        return catService.saveCategory(body);
-    }
-
-    @PostMapping(value = "all")
-    @ResponseStatus(HttpStatus.CREATED)
-    public categoryEntity postCatogoryByAll(@RequestBody categoryEntity body){
-        return catService.saveCategory(body);
-    }
-    @GetMapping(value = "save")
-    public List<categoryEntity>  getAllCategoresBySave(){
-        return catService.getAllCategories();
-    }
-
-    // Normal Request
     @GetMapping("/{id}")
     public categoryEntity getFarm(@PathVariable long id){
         Optional<categoryEntity> exist = catService.getCategoryByID(id);
@@ -82,6 +61,41 @@ public class categoryApi {
 
         if(!isDeleted){
             throw new notFoundException("Farm with id: " + body.getId() + " not exist");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteWhitId(@PathVariable long id){
+        boolean isDeleted = catService.delete(id);
+
+        if(!isDeleted){
+            throw new notFoundException("Farm with id: " + id + " not exist");
+        }
+    }
+
+    // MinTic Request
+
+    @GetMapping(value = "/all")
+    public List<categoryEntity> getEveryCatsInAll() {
+        return catService.getAllCategories();
+    }
+
+    @PostMapping(value = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addCategoryInAll(@RequestBody categoryEntity body){
+        categoryEntity exist = catService.saveCategory(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a category with the id: " + body.getId());
+        }
+    }
+
+    @PutMapping(value = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updaateInAll(@RequestBody categoryEntity body){
+        categoryEntity exsist = catService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Category with id: " + body.getId() + " not exist");
         }
     }
 }

@@ -29,27 +29,6 @@ public class farmApi {
     @Autowired
     private farmService farmService;
 
-    @GetMapping(value="all")
-    public List<farmEntity> getAllFarms() {
-        return farmService.getAllFarms();
-    }
-    @PostMapping(value="save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public farmEntity createFarm(@RequestBody farmEntity body){
-        return farmService.saveFarm(body);
-    }
-
-    @PostMapping(value = "all")
-    @ResponseStatus(HttpStatus.CREATED)
-    public farmEntity postFarmByAll(@RequestBody farmEntity body){
-        return farmService.saveFarm(body);
-    }
-    @GetMapping(value = "save")
-    public List<farmEntity> getAllFarmsBySave(){
-        return farmService.getAllFarms();
-    }
-
-    // Normal request
     @GetMapping("/{id}")
     public farmEntity getFarm(@PathVariable long id){
         Optional<farmEntity> exist = farmService.getFarmByID(id);
@@ -76,11 +55,47 @@ public class farmApi {
             throw new notFoundException("Farm with id: " + body.getId() + "not exist");
         }
     }
+    
     @DeleteMapping
     public void delete(@RequestBody farmEntity body){
         boolean isDeleted = farmService.delete(body.getId());
 
         if(!isDeleted){
+            throw new notFoundException("Farm with id: " + body.getId() + "not exist");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteWithId(@PathVariable long id){
+        boolean isDeleted = farmService.delete(id);
+
+        if(!isDeleted){
+            throw new notFoundException("Farm with id: " + id + "not exist");
+        }
+    }
+
+    // Mintic requests
+
+    @GetMapping(value = "all")
+    public List<farmEntity> getEveryFarmsInAll() {
+        return farmService.getAllFarms();
+    }
+    
+    @PostMapping(value = "all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addFarmInAll(@RequestBody farmEntity body){
+        farmEntity exist = farmService.saveFarm(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a farm with the id: " + body.getId());
+        }
+    }
+    
+    @PutMapping(value = "all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateInAll(@RequestBody farmEntity body){
+        farmEntity exsist = farmService.update(body);
+        if(exsist == null){
             throw new notFoundException("Farm with id: " + body.getId() + "not exist");
         }
     }

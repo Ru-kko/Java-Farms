@@ -28,28 +28,6 @@ public class messageApi {
     @Autowired
     private messageServie msgService;
 
-    @GetMapping(value = "all")
-    public List<messageEntity> getAllMessages() {
-        return msgService.getAllMessages();
-    }
-
-    @PostMapping(value = "save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public messageEntity createMessage(@RequestBody messageEntity body) {
-        return msgService.saveMessage(body);
-    }
-
-    @PostMapping(value = "all")
-    @ResponseStatus(HttpStatus.CREATED)
-    public messageEntity postMessageByAll(@RequestBody messageEntity body){
-        return msgService.saveMessage(body);
-    }
-    @GetMapping(value = "save")
-    public List<messageEntity> getAllMessagesBySave(){
-        return msgService.getAllMessages();
-    }
-
-    // Normal Request
     @GetMapping("/{id}")
     public messageEntity getFarm(@PathVariable long id) {
         Optional<messageEntity> exist = msgService.getMessageByID(id);
@@ -85,6 +63,41 @@ public class messageApi {
         boolean isDeleted = msgService.delete(body.getIdMessage());
 
         if (!isDeleted) {
+            throw new notFoundException("Message with id: " + body.getIdMessage() + " not exist");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteWihtID(@PathVariable long id) {
+        boolean isDeleted = msgService.delete(id);
+
+        if (!isDeleted) {
+            throw new notFoundException("Message with id: " + id + " not exist");
+        }
+    }
+
+    // Mintic Requests
+
+    @GetMapping(value = "/all")
+    public List<messageEntity> getEveryMessagesInAll() {
+        return msgService.getAllMessages();
+    }
+
+    @PostMapping(value = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addMessageInAll(@RequestBody messageEntity body) {
+        messageEntity exist = msgService.saveMessage(body);
+        if (exist == null) {
+            throw new unaceptableException("There is already a message with the id: " + body.getIdMessage());
+        }
+    }
+
+    @PutMapping(value = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updaateInAll(@RequestBody messageEntity body) {
+        messageEntity exsist = msgService.update(body);
+        if (exsist == null) {
             throw new notFoundException("Message with id: " + body.getIdMessage() + " not exist");
         }
     }
