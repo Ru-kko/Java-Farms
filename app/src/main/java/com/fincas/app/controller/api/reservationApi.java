@@ -28,28 +28,6 @@ public class reservationApi {
     @Autowired
     private reservatioService reservService;
 
-    @GetMapping(value = "all")
-    public List<reservationEntity> getAllReservations() {
-        return reservService.getAllReservations();
-    }
-
-    @PostMapping(value = "save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public reservationEntity createReservation(@RequestBody reservationEntity body) {
-        return reservService.saveReservation(body);
-    }
-
-    @PostMapping(value = "all")
-    @ResponseStatus(HttpStatus.CREATED)
-    public reservationEntity postReservationsByAll(@RequestBody reservationEntity body){
-        return reservService.saveReservation(body);
-    }
-    @GetMapping(value = "save")
-    public List<reservationEntity> getAllReservationsBySave(){
-        return reservService.getAllReservations();
-    }
-
-    // Normal Request
     @GetMapping("/{id}")
     public reservationEntity getReservation(@PathVariable long id) {
         Optional<reservationEntity> exist = reservService.getReservationById(id);
@@ -58,6 +36,7 @@ public class reservationApi {
         }
         return exist.get();
     }
+
     @GetMapping
     public List<reservationEntity> getEveryReservations() {
         return reservService.getAllReservations();
@@ -69,6 +48,7 @@ public class reservationApi {
             throw new unaceptableException("There is already a Reservation with the id: " + body.getIdReservation());
         }
     }
+
     @PutMapping
     public void update(@RequestBody reservationEntity body){
         reservationEntity exsist = reservService.update(body);
@@ -76,12 +56,47 @@ public class reservationApi {
             throw new notFoundException("Resevation with id: " + body.getIdReservation() + "not exist");
         }
     }
+
     @DeleteMapping
     public void delete(@RequestBody reservationEntity body){
         boolean isDeleted = reservService.delete(body.getIdReservation());
 
         if(!isDeleted){
             throw new notFoundException("Reservation with id: " + body.getIdReservation() + "not exist");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public void deleteWihtId(@PathVariable long id){
+        boolean isDeleted = reservService.delete(id);
+
+        if(!isDeleted){
+            throw new notFoundException("Reservation with id: " + id + "not exist");
+        }
+    }
+
+    // Mintic requests
+
+    @GetMapping(value = "/all")
+    public List<reservationEntity> getEveryReservationsInAll() {
+        return reservService.getAllReservations();
+    }
+
+    @PostMapping(value = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addReservationInAll(@RequestBody reservationEntity body){
+        reservationEntity exist = reservService.saveReservation(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a Reservation with the id: " + body.getIdReservation());
+        }
+    }
+
+    @PutMapping(value = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateInAll(@RequestBody reservationEntity body){
+        reservationEntity exsist = reservService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Resevation with id: " + body.getIdReservation() + "not exist");
         }
     }
 }

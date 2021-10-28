@@ -28,26 +28,6 @@ public class clientApi {
     @Autowired
     private clientService clientService;
 
-    @GetMapping(value = "all")
-    public List<clientEntity> getAllClients(){
-        return clientService.getAllClients();
-    }
-    @PostMapping(value = "save")
-    @ResponseStatus(HttpStatus.CREATED)
-    public clientEntity createClient(@RequestBody clientEntity body){
-        return clientService.saveClient(body);
-    }
-    @PostMapping(value = "all")
-    @ResponseStatus(HttpStatus.CREATED)
-    public clientEntity postClientByAll(@RequestBody clientEntity body){
-        return clientService.saveClient(body);
-    }
-    @GetMapping(value = "save")
-    public List<clientEntity> getAllClientsBySave(){
-        return clientService.getAllClients();
-    }
-
-    // Normal Request
     @GetMapping("/{id}")
     public clientEntity getFarm(@PathVariable long id){
         Optional<clientEntity> exist = clientService.getClientByID(id);
@@ -56,6 +36,7 @@ public class clientApi {
         }
         return exist.get();
     }
+
     @PostMapping
     public void addClient(@RequestBody clientEntity body){
         clientEntity exist = clientService.saveClient(body);
@@ -63,9 +44,11 @@ public class clientApi {
             throw new unaceptableException("There is already a client with the id: " + body.getIdClient());
         }
     }
+
     @GetMapping List<clientEntity> getEveryClients(){
         return clientService.getAllClients();
     }
+
     @PutMapping
     public void update(@RequestBody clientEntity body){
         clientEntity exsist = clientService.update(body);
@@ -73,12 +56,48 @@ public class clientApi {
             throw new notFoundException("Client with id: " + body.getIdClient() + " not exist");
         }
     }
+
     @DeleteMapping
     public void delete(@RequestBody clientEntity body){
         boolean isDeleted = clientService.delete(body.getIdClient());
 
         if(!isDeleted){
             throw new notFoundException("Client with id: " + body.getIdClient() + "not exist");
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void derleteWihtId(@PathVariable long id){
+        boolean isDeleted = clientService.delete(id);
+
+        if(!isDeleted){
+            throw new notFoundException("Client with id: " + id + "not exist");
+        }
+    }
+
+    // MinTic requests
+
+    @PostMapping(value = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addClientInAll(@RequestBody clientEntity body){
+        clientEntity exist = clientService.saveClient(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a client with the id: " + body.getIdClient());
+        }
+    }
+
+    @GetMapping (value = "/all")
+    public List<clientEntity> getEveryClientsInAll(){
+        return clientService.getAllClients();
+    }
+
+    @PutMapping(value = "/all")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateInAll(@RequestBody clientEntity body){
+        clientEntity exsist = clientService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Client with id: " + body.getIdClient() + " not exist");
         }
     }
 }
