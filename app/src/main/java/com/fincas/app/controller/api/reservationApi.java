@@ -99,4 +99,50 @@ public class reservationApi {
             throw new notFoundException("Resevation with id: " + body.getIdReservation() + "not exist");
         }
     }
+
+    @GetMapping(value = "/update")
+    public List<reservationEntity> getEveryReservationsInUpdate() {
+        return reservService.getAllReservations();
+    }
+
+    @PostMapping(value = "/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addReservationInUpdate(@RequestBody reservationEntity body){
+        reservationEntity exist = reservService.saveReservation(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a Reservation with the id: " + body.getIdReservation());
+        }
+    }
+
+    @PutMapping(value = "/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateInUpdate(@RequestBody reservationEntity body){
+        reservationEntity exsist = reservService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Resevation with id: " + body.getIdReservation() + "not exist");
+        }
+    }
+
+    @GetMapping(value = "/save")
+    public List<reservationEntity> getEveryReservationsInSave() {
+        return reservService.getAllReservations();
+    }
+
+    @PostMapping(value = "/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addReservationInSave(@RequestBody reservationEntity body){
+        reservationEntity exist = reservService.saveReservation(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a Reservation with the id: " + body.getIdReservation());
+        }
+    }
+
+    @PutMapping(value = "/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateInSave(@RequestBody reservationEntity body){
+        reservationEntity exsist = reservService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Resevation with id: " + body.getIdReservation() + "not exist");
+        }
+    }
 }

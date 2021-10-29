@@ -99,4 +99,50 @@ public class farmApi {
             throw new notFoundException("Farm with id: " + body.getId() + "not exist");
         }
     }
+
+    @GetMapping(value = "update")
+    public List<farmEntity> getEveryFarmsInUpdate() {
+        return farmService.getAllFarms();
+    }
+    
+    @PostMapping(value = "update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addFarmInUpdate(@RequestBody farmEntity body){
+        farmEntity exist = farmService.saveFarm(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a farm with the id: " + body.getId());
+        }
+    }
+    
+    @PutMapping(value = "update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateInUpdate(@RequestBody farmEntity body){
+        farmEntity exsist = farmService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Farm with id: " + body.getId() + "not exist");
+        }
+    }
+
+    @GetMapping(value = "save")
+    public List<farmEntity> getEveryFarmsInSave() {
+        return farmService.getAllFarms();
+    }
+    
+    @PostMapping(value = "save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addFarmInSave(@RequestBody farmEntity body){
+        farmEntity exist = farmService.saveFarm(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a farm with the id: " + body.getId());
+        }
+    }
+    
+    @PutMapping(value = "save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateInSave(@RequestBody farmEntity body){
+        farmEntity exsist = farmService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Farm with id: " + body.getId() + "not exist");
+        }
+    }
 }

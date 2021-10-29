@@ -90,7 +90,7 @@ public class categoryApi {
         }
     }
 
-    @PutMapping(value = "/update")
+    @PutMapping(value = "/all")
     @ResponseStatus(HttpStatus.CREATED)
     public void updaateInAll(@RequestBody categoryEntity body){
         categoryEntity exsist = catService.update(body);
@@ -129,7 +129,7 @@ public class categoryApi {
 
     @PostMapping(value = "/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public void addCategoryISava(@RequestBody categoryEntity body){
+    public void addCategoryISave(@RequestBody categoryEntity body){
         categoryEntity exist = catService.saveCategory(body);
         if(exist == null){
             throw new unaceptableException("There is already a category with the id: " + body.getId());
