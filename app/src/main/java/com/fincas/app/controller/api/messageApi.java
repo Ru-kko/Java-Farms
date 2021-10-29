@@ -101,4 +101,50 @@ public class messageApi {
             throw new notFoundException("Message with id: " + body.getIdMessage() + " not exist");
         }
     }
+
+    @GetMapping(value = "/update")
+    public List<messageEntity> getEveryMessagesInUpdate() {
+        return msgService.getAllMessages();
+    }
+
+    @PostMapping(value = "/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addMessageInUpdate(@RequestBody messageEntity body) {
+        messageEntity exist = msgService.saveMessage(body);
+        if (exist == null) {
+            throw new unaceptableException("There is already a message with the id: " + body.getIdMessage());
+        }
+    }
+
+    @PutMapping(value = "/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updaateInUpdate(@RequestBody messageEntity body) {
+        messageEntity exsist = msgService.update(body);
+        if (exsist == null) {
+            throw new notFoundException("Message with id: " + body.getIdMessage() + " not exist");
+        }
+    }
+
+    @GetMapping(value = "/save")
+    public List<messageEntity> getEveryMessagesInSave() {
+        return msgService.getAllMessages();
+    }
+
+    @PostMapping(value = "/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addMessageInSave(@RequestBody messageEntity body) {
+        messageEntity exist = msgService.saveMessage(body);
+        if (exist == null) {
+            throw new unaceptableException("There is already a message with the id: " + body.getIdMessage());
+        }
+    }
+
+    @PutMapping(value = "/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updaateInSave(@RequestBody messageEntity body) {
+        messageEntity exsist = msgService.update(body);
+        if (exsist == null) {
+            throw new notFoundException("Message with id: " + body.getIdMessage() + " not exist");
+        }
+    }
 }

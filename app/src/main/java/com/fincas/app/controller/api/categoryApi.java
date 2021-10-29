@@ -98,4 +98,50 @@ public class categoryApi {
             throw new notFoundException("Category with id: " + body.getId() + " not exist");
         }
     }
+
+    @GetMapping(value = "/update")
+    public List<categoryEntity> getEveryCatsInUpdate() {
+        return catService.getAllCategories();
+    }
+
+    @PostMapping(value = "/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addCategoryInUpdate(@RequestBody categoryEntity body){
+        categoryEntity exist = catService.saveCategory(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a category with the id: " + body.getId());
+        }
+    }
+
+    @PutMapping(value = "/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updaateInUpdate(@RequestBody categoryEntity body){
+        categoryEntity exsist = catService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Category with id: " + body.getId() + " not exist");
+        }
+    }
+
+    @GetMapping(value = "/save")
+    public List<categoryEntity> getEveryCatsInSave() {
+        return catService.getAllCategories();
+    }
+
+    @PostMapping(value = "/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addCategoryISave(@RequestBody categoryEntity body){
+        categoryEntity exist = catService.saveCategory(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a category with the id: " + body.getId());
+        }
+    }
+
+    @PutMapping(value = "/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updaateInSave(@RequestBody categoryEntity body){
+        categoryEntity exsist = catService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Category with id: " + body.getId() + " not exist");
+        }
+    }
 }

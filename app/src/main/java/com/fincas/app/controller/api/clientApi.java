@@ -100,4 +100,51 @@ public class clientApi {
             throw new notFoundException("Client with id: " + body.getIdClient() + " not exist");
         }
     }
+
+
+    @PostMapping(value = "/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addClientInUpdate(@RequestBody clientEntity body){
+        clientEntity exist = clientService.saveClient(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a client with the id: " + body.getIdClient());
+        }
+    }
+
+    @GetMapping (value = "/update")
+    public List<clientEntity> getEveryClientsInUpdate(){
+        return clientService.getAllClients();
+    }
+
+    @PutMapping(value = "/update")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateInUpdate(@RequestBody clientEntity body){
+        clientEntity exsist = clientService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Client with id: " + body.getIdClient() + " not exist");
+        }
+    }
+
+    @PostMapping(value = "/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void addClientInSave(@RequestBody clientEntity body){
+        clientEntity exist = clientService.saveClient(body);
+        if(exist == null){
+            throw new unaceptableException("There is already a client with the id: " + body.getIdClient());
+        }
+    }
+
+    @GetMapping (value = "/save")
+    public List<clientEntity> getEveryClientsInSave(){
+        return clientService.getAllClients();
+    }
+
+    @PutMapping(value = "/save")
+    @ResponseStatus(HttpStatus.CREATED)
+    public void updateInSave(@RequestBody clientEntity body){
+        clientEntity exsist = clientService.update(body);
+        if(exsist == null){
+            throw new notFoundException("Client with id: " + body.getIdClient() + " not exist");
+        }
+    }
 }
