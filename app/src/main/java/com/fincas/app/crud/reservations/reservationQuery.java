@@ -1,5 +1,6 @@
 package com.fincas.app.crud.reservations;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -29,7 +30,14 @@ public class reservationQuery {
     public void deleteById(long id){
         reservRep.deleteById(id);
     }
-    public List<Object[]> getStatusCount(){
-        return this.reservRep.getStatuscount();
+    public List<reservationEntity> getStatusCount(String status){
+        return reservRep.findAllByStatus(status);
+    }
+
+    public List<Object[]> countTotalReservations(){
+        return reservRep.countTotalReservations();
+    }
+    public List<reservationEntity> getReservationEntitieBetwent(Date a, Date b){
+        return reservRep.findAllByStartDateAfterAndStartDateBefore(a, b);
     }
 }
