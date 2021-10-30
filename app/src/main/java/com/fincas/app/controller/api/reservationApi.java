@@ -1,6 +1,8 @@
 package com.fincas.app.controller.api;
 
+import java.math.BigInteger;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.fincas.app.controller.api.exeptions.notFoundException;
@@ -76,6 +78,11 @@ public class reservationApi {
     }
 
     // Mintic requests
+
+    @GetMapping(value = "/report-status")
+    public Map<String, BigInteger> getStatusCount(){
+        return this.reservService.getStatusCount();
+    }
 
     @GetMapping(value = "/all")
     public List<reservationEntity> getEveryReservationsInAll() {

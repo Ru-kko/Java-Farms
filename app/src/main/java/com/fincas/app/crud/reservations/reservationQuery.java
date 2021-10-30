@@ -29,4 +29,7 @@ public class reservationQuery {
     public void deleteById(long id){
         reservRep.deleteById(id);
     }
+    public List<Object[]> getStatusCount(){
+        return this.reservRep.getStatuscount();
+    }
 }

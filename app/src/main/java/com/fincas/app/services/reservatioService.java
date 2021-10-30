@@ -1,6 +1,9 @@
 package com.fincas.app.services;
 
+import java.math.BigInteger;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import com.fincas.app.crud.reservations.reservationEntity;
@@ -68,5 +71,15 @@ public class reservatioService {
             return true;
         }).orElse(false);
         return isDeleted;
+    }
+
+    public Map<String, BigInteger> getStatusCount(){
+        Map<String, BigInteger> map = new HashMap<>();
+
+        for (Object[] i : resRep.getStatusCount()){
+            map.put((String)i[0] , (BigInteger) i[1]);
+        }
+
+        return map;
     }
 }

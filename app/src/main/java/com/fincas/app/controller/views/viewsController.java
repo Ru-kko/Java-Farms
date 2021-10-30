@@ -18,8 +18,10 @@ public class viewsController extends WebSecurityConfigurerAdapter {
         ).exceptionHandling(e -> e
             .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
         ).oauth2Login();
-    }
 
+        http.cors().and().csrf().disable();
+    }
+    
     @GetMapping("/")
     public String homeView(Model model) {
         model.addAttribute("title", "Reto 3");
