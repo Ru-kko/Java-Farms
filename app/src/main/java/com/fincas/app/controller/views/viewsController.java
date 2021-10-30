@@ -13,7 +13,7 @@ public class viewsController extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests( a -> a
-            .antMatchers("/", "/error", "/css/**", "/js/**", "/api/**", "/public/**").permitAll()
+            .antMatchers("/", "/error", "/css/**", "/js/**", "/api/**/**", "/public/**").permitAll()
             .anyRequest().authenticated()
         ).exceptionHandling(e -> e
             .authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED))
